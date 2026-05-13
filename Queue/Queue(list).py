@@ -18,13 +18,21 @@ class Queue:
             print(self.queue, self.rear, "is added to queue at", self.rear, "position")
 
     def dequeue(self):
-        if self.front == -1 :
+        if self.front == -1:
             print("Queue is empty")
             return
         else:
-            deleted = self.queue[self.front]
-            print(deleted,"is deleted from queue at ",self.front," position")
-            self.front=self.front+1
+            deleted = self.queue[0]
+            print(deleted, "is deleted from queue")
+
+            for i in range(0, self.rear ):
+                self.queue[i] = self.queue[i+1]
+
+            self.queue.pop()
+            self.rear -= 1
+
+            if self.rear == -1:
+                self.front = -1
 
     def display(self):
         if self.front == -1 :
