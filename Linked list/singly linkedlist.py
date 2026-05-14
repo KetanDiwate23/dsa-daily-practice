@@ -29,20 +29,26 @@ class SinglyLinkedlist:
             temp = temp.next
         temp.next = new_node
 
-    def deletion(self,data):
+    def deletion(self, data):
         temp = self.head
         prev = None
 
-        while temp is not None and temp!= data :
-            temp = temp.next
+        # Search for node
+        while temp is not None and temp.data != data:
             prev = temp
+            temp = temp.next
 
-        if temp.next is None:
-            print('Element not found')
+        # If element not found
+        if temp is None:
+            print("Element not found")
             return
 
+        # If deleting head node
+        if prev is None:
+            self.head = temp.next
+
         else:
-            temp.next = prev
+            prev.next = temp.next
 
         del temp
         print('element deleted')
