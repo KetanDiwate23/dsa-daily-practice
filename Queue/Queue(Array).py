@@ -44,7 +44,7 @@ while True:
     choice = int(input("Enter your choice: "))
 
     if choice == 1:
-        val = int(input("Enter value to enqueue: "))
+        val = int(input("Enter v1alue to enqueue: "))
         q.enqueue(val)
 
     elif choice == 2:
