@@ -80,98 +80,49 @@ class DoublyLinkedlist:
 
             #  CONNECTIONS CHANGE
             new_node.next = temp.next  # New node ka next = current node ke next pe point karega
-
             new_node.prev = temp  # New node ka prev = current node pe point karega
 
+                # do nodes ke beechme insert karne ka logic
             if temp.next is not None:  # Agar new node last pe nahi insert ho raha
-
                 temp.next.prev = new_node # Next node ka prev = new node pe point karega
-
             temp.next = new_node # Current node ka next = new node
             print(data, "added at", pos)
 
-    def delete(self):
-
-        # Empty list check
-        if self.head is None:
-            print("Linked List Empty")
-            return
-
-        value = int(input("Enter value to delete: ")) # Delete karne wala value
+    def deletion(self, data):
         temp = self.head
+        prev = None
 
-        if temp.data == value:
+        # Search for node
+        while temp is not None and temp.data != data:
+            prev = temp
+            temp = temp.next
 
-            self.head = temp.next # Head ko next node bana do
-            if self.head is not None: # Agar next node exist karta hai
-
-                self.head.prev = None  # New head ka prev = None
-            print(value, "deleted")
+        # If element not found
+        if temp is None:
+            print("Element not found")
             return
 
-        # LIST ME SEARCH KARO
-        while temp is not None:
-            if temp.data == value: # Element mil gaya
-                temp.prev.next = temp.next  # Previous node ka next = current node ka next
-                if temp.next is not None: # Agar current node last node nahi hai
-                    temp.next.prev = temp.prev  # Next node ka prev = current node ka prev
-                print(value, "deleted")
-                return
+        # If deleting head node
+        if prev is None:
+            self.head = temp.next
 
-            temp = temp.next  # Next node pe jao
-        print("Element not found")
+        else:
+            prev.next = temp.next
 
-    def search(self):
+        del temp
+        print('element deleted')
 
-        if self.head is None: # Empty list check
-            print("Linked List Empty")
-            return
-        value = int(input("Enter value to search: "))
-        temp = self.head
-        pos = 0 # Position track karne ke liye
-        while temp: # Traversal
-            if temp.data == value: # Element mil gaya
-                print(value, "found at", pos)
-                return
-            temp = temp.next # Next node pe jao
-            pos += 1  # Position increase
-        print("Element not found")
-    def sort(self):
 
-        if self.head is None: # Empty list check
-            print("Linked List Empty")
-            return
-        temp = self.head
-
-        while temp: # Outer loop
-            index = temp.next # Next node compare ke liye
-
-            while index: # Inner loop
-
-                if temp.data > index.data:  # Agar current data bada hai
-
-                    temp.data, index.data = index.data, temp.data # Data swap karo
-
-                index = index.next   # Next node pe jao
-
-            temp = temp.next # Next node pe jao
-        print("Linked List Sorted")
 
 
     def display(self):
 
-
-        if self.head is None: # Empty list
-            print("Linked List Empty")
-            return
         temp = self.head
 
-        while temp: # Har node print karo
-            print(temp.data, "<->", end=" ")
-
-            temp = temp.next  # Next node pe jao
-        print("None")
-
+        while temp is not None:
+            print(temp.data, '->', end=' ')
+            temp = temp.next
+        print('None')
 
 DL = DoublyLinkedlist()  # OBJECT CREATE
 while True:
@@ -201,7 +152,7 @@ while True:
         DL.insert_at_any_position(data=int(input("Enter element: ")))
 
     elif choice == 5:
-        print('element deleted',DL.delete())
+        DL.deletion(data=int(input("Enter element: ")))
 
     elif choice == 6:
         DL.display()
