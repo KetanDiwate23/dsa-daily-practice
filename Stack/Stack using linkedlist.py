@@ -3,7 +3,7 @@ class Node:
         self.data = data
         self.next = None
 
-class Stack:
+class Stack_using_Linkedlist:
     def __init__(self):
         self.top = None
 
@@ -46,7 +46,7 @@ class Stack:
                 temp = temp.next
 
 
-SLL = Stack()
+SLL = Stack_using_Linkedlist()
 while True:
     print('Stack using linkedlist')
     print('1. Push')
@@ -67,3 +67,9 @@ while True:
 
     elif choice == 4:
         SLL.display()
+
+    elif choice == 5:
+        break
+
+    else:
+        print("Enter a valid choice")
